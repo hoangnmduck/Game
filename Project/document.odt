@@ -1,0 +1,47 @@
+LÝ THUYẾT ĐỒ THỊ
+ĐỊNH NGHĨA
+Đồ thị là một cặp G = (V, E) trong đó V là tập hợp các đỉnh (vertex) và E là tập hợp các cạnh (edge) của đồ thị.
+
+CÁC LOẠI ĐỒ THỊ
+Đồ thị vô hướng (undirected graph): là đồ thị mà các cạnh không có hướng, tức là nếu có cạnh nối từ đỉnh i đến đỉnh j thì cũng có cạnh nối từ đỉnh j đến đỉnh i.
+Đồ thị có hướng (directed graph): là đồ thị mà các cạnh có hướng, tức là nếu có cạnh nối từ đỉnh i đến đỉnh j thì không nhất thiết có cạnh nối từ đỉnh j đến đỉnh i.
+Đồ thị đơn (simple graph): là đồ thị mà không có cạnh nối từ một đỉnh đến chính nó và không có hai cạnh nối giữa hai đỉnh bất kỳ.
+Đồ thị đầy đủ (complete graph): là đồ thị mà có cạnh nối giữa mọi cặp đỉnh.
+Đồ thị con (subgraph): là đồ thị mà tập hợp các đỉnh và tập hợp các cạnh của nó là một phần của tập hợp các đỉnh và tập hợp các cạnh của một đồ thị khác.
+Đồ thị độc lập (independent graph): là đồ thị mà không có hai đỉnh nào kề nhau.
+Đồ thị liên thông (connected graph): là đồ thị mà có đường đi giữa mọi cặp đỉnh.
+
+BIỂU DIỄN ĐỒ THỊ
+Biểu diễn đồ thị bằng ma trận kề (adjacency matrix): là một ma trận hai chiều, trong đó hàng thứ i và cột thứ j có giá trị 1 nếu có cạnh nối từ đỉnh i đến đỉnh j, ngược lại có giá trị 0.
+Biểu diễn đồ thị bằng danh sách cạnh (edge list): là một danh sách các cạnh, trong đó mỗi cạnh được biểu diễn bằng một cặp đỉnh.
+Biểu diễn đồ thị bằng danh sách kề (adjacency list): là một danh sách các đỉnh, trong đó mỗi đỉnh được biểu diễn bằng một danh sách các đỉnh kề với nó.
+
+Các cấu trúc dữ liệu đồ thị
+Có nhiều cách khác nhau để lưu trữ các đồ thị trong máy tính. Sử dụng cấu trúc dữ liệu nào thì tùy theo cấu trúc của đồ thị và thuật toán dùng để thao tác trên đồ thị đó. Trên lý thuyết, người ta có thể phân biệt giữa các cấu trúc danh sách và các cấu trúc ma trận. Tuy nhiên, trong các ứng dụng cụ thể, cấu trúc tốt nhất thường là kết hợp của cả hai. Người ta hay dùng các cấu trúc danh sách cho các đồ thị thưa (sparse graph), do chúng đòi hỏi ít bộ nhớ. Trong khi đó, các cấu trúc ma trận cho phép truy nhập dữ liệu nhanh hơn, nhưng lại cần lượng bộ nhớ lớn nếu đồ thị có kích thước lớn.
+Các cấu trúc danh sách
+
+    Danh sách liên thuộc (Incidence list) - Mỗi đỉnh có một danh sách các cạnh nối với đỉnh đó. Các cạnh của đồ thị được có thể được lưu trong một danh sách riêng (có thể cài đặt bằng mảng (array) hoặc danh sách liên kết động (linked list)), trong đó mỗi phần tử ghi thông tin về một cạnh, bao gồm: cặp đỉnh mà cạnh đó nối (cặp này sẽ có thứ tự nếu đồ thị có hướng), trọng số và các dữ liệu khác. Danh sách liên thuộc của mỗi đỉnh sẽ chiếu tới vị trí của các cạnh tương ứng tại danh sách cạnh này.
+    Danh sách kề (Adjacency list) - Mỗi đỉnh của đồ thị có một danh sách các đỉnh kề nó (nghĩa là có một cạnh nối từ đỉnh này đến mỗi đỉnh đó). Trong đồ thị vô hướng, cấu trúc này có thể gây trùng lặp. Chẳng hạn nếu đỉnh 3 nằm trong danh sách của đỉnh 2 thì đỉnh 2 cũng phải có trong danh sách của đỉnh 3. Lập trình viên có thể chọn cách sử dụng phần không gian thừa, hoặc có thể liệt kê các quan hệ kề cạnh chỉ một lần. Biểu diễn dữ liệu này thuận lợi cho việc từ một đỉnh duy nhất tìm mọi đỉnh được nối với nó, do các đỉnh này đã được liệt kê tường minh.
+
+Các cấu trúc ma trận
+
+    Ma trận liên thuộc (Incidence matrix) - Đồ thị được biểu diễn bằng một ma trận [ b i j ] {\displaystyle [b_{ij}]} kích thước p × q, trong đó p là số đỉnh và q là số cạnh, b i j = 1 {\displaystyle b_{ij}=1} chứa dữ liệu về quan hệ giữa đỉnh v i {\displaystyle v_{i}} và cạnh x j {\displaystyle x_{j}}. Đơn giản nhất: b i j = 1 {\displaystyle b_{ij}=1} nếu đỉnh v i {\displaystyle v_{i}} là một trong 2 đầu của cạnh x j {\displaystyle x_{j}}, bằng 0 trong các trường hợp khác.
+    Ma trận kề (Adjaceny matrix) - một ma trận N × N, trong đó N là số đỉnh của đồ thị. Nếu có một cạnh nào đó nối đỉnh v i {\displaystyle v_{i}}với đỉnh v j {\displaystyle v_{j}} thì phần tử M i , j {\displaystyle M_{i,j}} bằng 1, nếu không, nó có giá trị 0. Cấu trúc này tạo thuận lợi cho việc tìm các đồ thị con và để đảo các đồ thị.
+    Ma trận dẫn nạp (Admittance matrix) hoặc ma trận Kirchhoff (Kirchhoff matrix) hay ma trận Laplace (Laplacian matrix) - được định nghĩa là kết quả thu được khi lấy ma trận bậc (degree matrix) trừ đi ma trận kề. Do đó, ma trận này chứa thông tin cả về quan hệ kề (có cạnh nối hay không) giữa các đỉnh lẫn bậc của các đỉnh đó.
+
+ỨNG DỤNG CỦA ĐỒ THỊ
+Đồ thị là một cấu trúc dữ liệu rất quan trọng, có nhiều ứng dụng trong thực tế. 
+Các ứng dụng này có thể được chia thành hai nhóm chính: ứng dụng trong lý thuyết đồ thị và ứng dụng trong thực tiễn.
+Lý thuyết đồ thị được ứng dụng nhiều trong phân tích lưới. Có hai kiểu phân tích lưới. Kiểu thứ nhất là phân tích để tìm các tính chất về cấu trúc của một lưới, chẳng hạn nó là một scale-free network hay là một small-world network. Kiểu thứ hai, phân tích để đo đạc, chẳng hạn mức độ lưu thông xe cộ trong một phần của mạng lưới giao thông (transportation network).
+
+Lý thuyết đồ thị còn được dùng trong nghiên cứu phân tử. Trong vật lý vật chất ngưng tụ, cấu trúc ba chiều phức tạp của các hệ nguyên tử có thể được nghiên cứu một cách định lượng bằng cách thu thập thống kê về các tính chất lý thuyết đồ thị có liên quan đến cấu trúc tô pô của các nguyên tử. Ví dụ, các vành đường đi ngắn nhất Franzblau (Franzblau's shortest-path rings). 
+
+
+COMUNITY DETECTION
+Community detection là một bài toán trong đồ thị, có nhiều ứng dụng trong thực tế. 
+Bài toán này có đầu vào là một đồ thị và đầu ra là một phân hoạch của đồ thị đó thành các cộng đồng (community). 
+Một cộng đồng là một tập hợp các đỉnh trong đồ thị, trong đó các đỉnh trong cùng một cộng đồng có mối quan hệ mật thiết với nhau, còn các đỉnh ở hai cộng đồng khác nhau có mối quan hệ thưa thớt hơn. 
+Các cộng đồng này có thể là các nhóm bạn bè, các nhóm người có cùng sở thích, các nhóm người có cùng nghề nghiệp, các nhóm người có cùng địa điểm sinh sống, v.v.
+Các cộng đồng này có thể được tìm ra bằng nhiều cách khác nhau, tùy thuộc vào bài toán cụ thể.
+Có thể kể đến một số cách tìm cộng đồng như: tìm cộng đồng bằng cách tối ưu hóa một hàm mục tiêu, tìm cộng đồng bằng cách phân chia đồ thị thành các cụm, tìm cộng đồng bằng cách phân chia đồ thị thành các cụm, v.v.
+
